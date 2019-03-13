@@ -32,7 +32,7 @@
     </ion-grid>  
       
       <ion-list>
-        <ion-item *ngFor="let pessoa of pessoasFiltradas">
+        <ion-item *ngFor="let pessoa of pessoasFiltradas" (click)="atualizar()" >
           <ion-avatar slot="start">
             <img src="../../assets/{{pessoa.id}}.jpg">
           </ion-avatar>

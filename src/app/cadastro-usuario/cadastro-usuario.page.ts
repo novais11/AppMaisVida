@@ -87,9 +87,7 @@ export class CadastroUsuarioPage implements OnInit {
       {nome: 'Não'}
     ];
 
-
     this.inicializarLista();
-
   }
 
   inicializarLista() {
@@ -97,8 +95,8 @@ export class CadastroUsuarioPage implements OnInit {
     this.listaPessoas = lista ? JSON.parse(lista) : [];
   }
 
+
   ngOnInit() {
-    console.log(this.listaPessoas);
   }
 
   salvar() {
@@ -106,7 +104,6 @@ export class CadastroUsuarioPage implements OnInit {
     this.listaPessoas.push(this.pessoas);
     localStorage.setItem('listaAtualizada', JSON.stringify(this.listaPessoas));
     this.pessoas = new UsuarioModel();
-    console.log(this.listaPessoas);
   }
 
 

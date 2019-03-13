@@ -26,22 +26,26 @@ export class ListaUsuarioPage  {
 
       {id: 2, nome: 'Paula', email: 'paula@gamil.com', nacionalidade: 'Argentino',
       estado: 'Distrito Federal', escolaridade: 'Ensino Médio Completo', sConjugal: 'Solteiro',
-       fEscola: 'não', nomeMae: 'Maria José', nomePai: 'José Maria', data:this.converterData()},
+       fEscola: 'não', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
 
       {id: 3, nome: 'Ana', email: 'anapaula@gamil.com', nacionalidade: 'Uruguaio',
       estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data:this.converterData()},
+       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
 
       {id: 4, nome: 'Rogério', email: 'rogerio@gamil.com', nacionalidade: 'Paraguaio',
       estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data:this.converterData()},
+       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
     ];
 
-    this.listaAtualizada();
+    localStorage.setItem('listaAtualizada', JSON.stringify(this.pessoas));
   }
 
   converterData() {
     this.dataHoje = this.now.getDay() + 1 +"/" + this.now.getMonth() +"/"+ this.now.getFullYear();
+  }
+
+  ionViewDidEnter() {
+    this.listaAtualizada();
   }
 
   listaAtualizada() {
@@ -70,8 +74,11 @@ export class ListaUsuarioPage  {
   }
 
   irParaCadastro() {
-    this.navCtrl.navigateForward('cadastro-usuario');
-    localStorage.setItem('listaAtualizada', JSON.stringify(this.pessoas));
+    this.navCtrl.navigateForward('cadastro-usuario');    
+  }
+
+  atualizar(el) {
+   console.log(el);
   }
 
 }
