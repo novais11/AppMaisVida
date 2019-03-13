@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'lista-usuario',
     pathMatch: 'full'
   },
   {
@@ -14,6 +14,12 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
+  },
+  { path: 'cadastro-usuario', 
+    loadChildren: './cadastro-usuario/cadastro-usuario.module#CadastroUsuarioPageModule' 
+  },
+  { path: 'lista-usuario', 
+  loadChildren: './lista-usuario/lista-usuario.module#ListaUsuarioPageModule' 
   }
 ];
 
