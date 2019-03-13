@@ -9,15 +9,16 @@
   </ion-toolbar>
 
 
-<ion-content padding style="background: #EEF2F5;width: 100%"  >
+<ion-content padding   >
   <div  >
-  <ion-fab vetical="center" horizontal="end" >
   
-    <ion-fab-button color="danger" (ionClick)="irParaCadastro()" >
-        <ion-icon name="add" ></ion-icon>
-      </ion-fab-button>
-  </ion-fab>
   <div style="width: 75%; margin: auto; background: white">
+      <ion-fab vetical="center" horizontal="end" >
+  
+          <ion-fab-button color="danger" (click)="irParaCadastro()" >
+              <ion-icon name="add" ></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
 
     <ion-grid>
       <ion-row>
@@ -41,9 +42,7 @@
             <h3>{{pessoa.nacionalidade}}</h3>
           </ion-label>
 
-          <ion-grid>
-
-          </ion-grid>
+         
           <ion-label>
             <h3>12/03/19</h3>
           </ion-label>

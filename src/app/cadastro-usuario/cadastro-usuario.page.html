@@ -1,9 +1,121 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cadastroUsuario</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title >
+        Dados Pessoais
+      </ion-title>
+      <ion-label slot="end" style="margin-right: 5px" (click)="salvar()">
+        SALVAR
+      </ion-label>
+      
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+  <ion-label>Dados Pessoais</ion-label>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+
+          <ion-item>
+              <ion-label position="floating">Nome Completo</ion-label>
+              <ion-input style="margin-left: 20px" [(ngModel)]="pessoas.nome"></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+
+    <ion-item>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input [(ngModel)]="pessoas.email"></ion-input>
+    </ion-item>
+
+  </ion-col>
+</ion-row>
+</ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nacionalidade</ion-label>
+            <ion-select [(ngModel)]="pessoas.nacionalidade">
+              <ion-select-option *ngFor="let nacionalidade of nacionalidades">{{nacionalidade.nome}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Estado</ion-label>
+                <ion-select [(ngModel)]="pessoas.estado">
+                  <ion-select-option *ngFor="let estado of estados">{{estado.nome}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Escolaridade</ion-label>
+                <ion-select [(ngModel)]="pessoas.escolaridade">
+                  <ion-select-option *ngFor="let ecolaridade of ecolaridades">{{ecolaridade.nome}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Situação Conjugal</ion-label>
+                <ion-select [(ngModel)]="pessoas.sConjugal">
+                  <ion-select-option *ngFor="let situacao of situacaoConjugal">{{situacao.nome}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+          
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Frequenta escola</ion-label>
+                <ion-select [(ngModel)]="pessoas.fEscola">
+                  <ion-select-option *ngFor="let f of frequenta">{{f.nome}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Nome da Mãe</ion-label>
+                <ion-input [(ngModel)]="pessoas.nomeMae"></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+                <ion-label position="floating">Nome do Pai</ion-label>
+                <ion-input [(ngModel)]="pessoas.nomePai"></ion-input>
+            </ion-item>    
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+
+  
 </ion-content>
