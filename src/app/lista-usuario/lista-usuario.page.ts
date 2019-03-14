@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { NavController, AlertController, PopoverController } from '@ionic/angular';
 import { UsuarioModel } from 'src/shared/models/usuario.model';
 import { UsuarioService } from '../services/usuario';
@@ -16,16 +16,16 @@ import { SubMenuComponent } from '../sub-menu/sub-menu.component';
 })
 export class ListaUsuarioPage  {
 
+  @Input()
+  listaAualizada = false;
+
   nome: string = '';
   pessoas: Array<UsuarioModel> = new Array<UsuarioModel>();
   pessoasFiltradas: any;
   now = new Date();
   dataHoje: any;
 
-  @Input()
-  Tipo: any;
-
-
+ 
   constructor(public navCtrl: NavController,
               public usuarioService: UsuarioService,
               private popoverCtrl: PopoverController,
@@ -56,7 +56,17 @@ export class ListaUsuarioPage  {
     this.dataHoje = this.now.getDay() + 1 +"/" + this.now.getMonth() +"/"+ this.now.getFullYear();
   }
 
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    if(simpleChanges.listaAualizada && simpleChanges.listaAualizada.currentValue){
+      this.listaAtualizada();
+    }
+  }
+
   ionViewDidEnter() {
+    this.listaAtualizada();
+  }
+
+  ionViewWillEnter() {
     this.listaAtualizada();
   }
 
@@ -109,30 +119,6 @@ export class ListaUsuarioPage  {
     return await popover.present();
   }
 
-  async abrirAlert() {
-    let alert = await this.alertCtrl.create({
-      header: 'Deseja excluir este perfil?',
-      message: 'Ao excluir este perfil, todos os dados serão deletados e não poderão ser recuperados novamente. Você tem certeza disso?',
-      buttons: [
-        {
-          text: 'Não',
-          role: 'cancel',
-          handler : () => {
-            this.alertCtrl.dismiss();
-          }
-        },
-        {
-          text: 'Sim',
-          handler : () => {
-            let listaParaExcluir = this.listaAtualizada();
-
-          }
-        }
-      ]
-    });
-
-    alert.present();
-  }
 
 
 

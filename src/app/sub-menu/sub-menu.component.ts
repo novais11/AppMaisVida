@@ -13,6 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class SubMenuComponent implements OnInit {
   listaPessoas: Array<any> = [];
   pessoas: UsuarioModel = new UsuarioModel();
+  atualizar =  false;
 
   @Output()
   eventoAlert: EventEmitter<any> = new EventEmitter<any>();
