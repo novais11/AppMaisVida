@@ -9,7 +9,7 @@ export class UsuarioModel {
     fEscola: string;
     nomeMae: string;
     nomePai: string;
-    data: any;
+    
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

@@ -1,5 +1,7 @@
 {
   "name": "AppMaisVida",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,8 +1,13 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
-import { CadastroUsuarioPageModule } from '../cadastro-usuario/cadastro-usuario.module';
+import { NavController, AlertController, PopoverController } from '@ionic/angular';
 import { UsuarioModel } from 'src/shared/models/usuario.model';
+import { UsuarioService } from '../services/usuario';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
+import { SubMenuComponent } from '../sub-menu/sub-menu.component';
+
+
+
 
 @Component({
   selector: 'app-lista-usuario',
@@ -17,24 +22,26 @@ export class ListaUsuarioPage  {
   now = new Date();
   dataHoje: any;
 
-  constructor(public navCtrl: NavController){
+  constructor(public navCtrl: NavController, 
+              public usuarioService: UsuarioService,
+              private popoverCtrl: PopoverController){
     this.pessoas = [
       // tslint:disable-next-line:max-line-length
       {id: 1, nome: 'Pedro', email: 'pedro@gamil.com', nacionalidade: 'Brasileiro',
        estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-        fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData() },
+        fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria' },
 
       {id: 2, nome: 'Paula', email: 'paula@gamil.com', nacionalidade: 'Argentino',
       estado: 'Distrito Federal', escolaridade: 'Ensino Médio Completo', sConjugal: 'Solteiro',
-       fEscola: 'não', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
+       fEscola: 'não', nomeMae: 'Maria José', nomePai: 'José Maria' },
 
       {id: 3, nome: 'Ana', email: 'anapaula@gamil.com', nacionalidade: 'Uruguaio',
       estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
+       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria'},
 
       {id: 4, nome: 'Rogério', email: 'rogerio@gamil.com', nacionalidade: 'Paraguaio',
       estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria', data: this.converterData()},
+       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria'},
     ];
 
     localStorage.setItem('listaAtualizada', JSON.stringify(this.pessoas));
@@ -78,7 +85,26 @@ export class ListaUsuarioPage  {
   }
 
   atualizar(el) {
-   console.log(el);
+    this.usuarioService.setDestn(el);
+    this.navCtrl.navigateForward('cadastro-usuario');
   }
+
+  excluir(el, event) {
+    this.usuarioService.setDestn(el);
+    this.apresentarPopover(event);
+  }
+
+
+  async apresentarPopover(event : any){
+    const popover = await this.popoverCtrl.create({
+      component: SubMenuComponent,
+      event: event,
+     
+    });
+
+    return await popover.present();
+  }
+
+
 
 }

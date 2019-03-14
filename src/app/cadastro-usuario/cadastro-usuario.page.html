@@ -1,29 +1,42 @@
+
+
 <ion-header>
+    <div class="topo"></div>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
+          <ion-back-button color="light" ></ion-back-button>
       </ion-buttons>
-      <ion-title >
+      <ion-title color="light" >
         Dados Pessoais
       </ion-title>
-      <ion-label slot="end" style="margin-right: 5px" (click)="salvar()">
+      <ion-label slot="end" style="margin-right: 10px;margin-top: 20px;color: white" (click)="salvar()">
         SALVAR
       </ion-label>
       
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
+    <div class="fundo"  >
 
-  <ion-label>Dados Pessoais</ion-label>
-  
-
-        <ion-avatar >
-          <ion-img src="../../assets/foto.jpg" style="width: 75px; height: 75px; margin-left: auto; margin-right: auto"></ion-img>
-        </ion-avatar>
+        <div class="lista ">
+          <br>
+          <ion-label style="color: #208A77" >Dados Pessoais</ion-label>
+          
+        <div *ngIf="pessoas.id == null">
+            <ion-avatar style="margin: auto" >
+                <ion-img src="../../assets/foto.jpg" style="width: 75px; height: 75px;"></ion-img>
+            </ion-avatar>
+        </div>  
+        
+        <div *ngIf="pessoas.id != null">
+            <ion-avatar style="margin: auto" >
+                <ion-img src="../../assets/{{pessoas.id}}.jpg" style="width: 75px; height: 75px;"></ion-img>
+            </ion-avatar>
+        </div>
      
 
-    <ion-grid>
+    <ion-grid style="margin-top: 10px">
       <ion-row>
         <ion-col>
 
@@ -122,6 +135,7 @@
           </ion-col>
         </ion-row>
     </ion-grid>
-
-  
+        </div>
+      </div>
 </ion-content>
+

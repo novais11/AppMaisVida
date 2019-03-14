@@ -1,7 +1,8 @@
 
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+ 
+  <ion-toolbar >
+    <ion-buttons  slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title>
       Usuário
@@ -9,16 +10,18 @@
   </ion-toolbar>
 
 
-<ion-content padding   >
-  <div  >
+
+<ion-content >
+  <div class="fundo"  >
   
-  <div style="width: 75%; margin: auto; background: white">
-      <ion-fab vetical="center" horizontal="end" >
+  <div class="lista ">
+      <ion-fab class="fab" vetical="center" horizontal="end" >
   
           <ion-fab-button color="danger" (click)="irParaCadastro()" >
               <ion-icon name="add" ></ion-icon>
             </ion-fab-button>
-        </ion-fab>
+
+      </ion-fab>
 
     <ion-grid>
       <ion-row>
@@ -31,28 +34,46 @@
       </ion-row>
     </ion-grid>  
       
-      <ion-list>
-        <ion-item *ngFor="let pessoa of pessoasFiltradas" (click)="atualizar()" >
+      <ion-list no-padding>
+        
+        <ion-item *ngFor="let pessoa of pessoasFiltradas" style="height: 150x;"  >
+          
           <ion-avatar slot="start">
             <img src="../../assets/{{pessoa.id}}.jpg">
           </ion-avatar>
+          <div (click)="atualizar(pessoa)" style="width: 250px; height: 80px;margin-top: 20px">
+
           <ion-label>
             <h2>{{pessoa.nome}}</h2>
             <h3>{{pessoa.email}}</h3>
             <h3>{{pessoa.nacionalidade}}</h3>
           </ion-label>
 
-         
-          <ion-label>
-            <h3>12/03/19</h3>
-          </ion-label>
-          <ion-icon name="more" ios="ios-more" md="md-more" ></ion-icon>
+          </div>
+
+          <ion-grid>
+           
+            <ion-row>
+                <ion-label style="margin-left: 150px;margin-bottom: 10px;">
+                    <small>12/03/19</small>
+                </ion-label>
+                <ion-icon (click)="excluir(pessoa,$event)"style="margin-left: 180px; margin-bottom: 20px" name="more" ios="ios-more" md="md-more" ></ion-icon>
+            </ion-row>
+          </ion-grid>
+      
           
-        </ion-item>
+            
+          
+            
+          
+          
+        </ion-item> 
+        <br>
       </ion-list>
 
   </div>
 
     
 </div>
+
 </ion-content>
