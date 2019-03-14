@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavController, AlertController, PopoverController } from '@ionic/angular';
 import { UsuarioModel } from 'src/shared/models/usuario.model';
 import { UsuarioService } from '../services/usuario';
@@ -22,9 +22,14 @@ export class ListaUsuarioPage  {
   now = new Date();
   dataHoje: any;
 
-  constructor(public navCtrl: NavController, 
+  @Input()
+  Tipo: any;
+
+
+  constructor(public navCtrl: NavController,
               public usuarioService: UsuarioService,
-              private popoverCtrl: PopoverController){
+              private popoverCtrl: PopoverController,
+              private  alertCtrl: AlertController) {
     this.pessoas = [
       // tslint:disable-next-line:max-line-length
       {id: 1, nome: 'Pedro', email: 'pedro@gamil.com', nacionalidade: 'Brasileiro',
@@ -81,7 +86,7 @@ export class ListaUsuarioPage  {
   }
 
   irParaCadastro() {
-    this.navCtrl.navigateForward('cadastro-usuario');    
+    this.navCtrl.navigateForward('cadastro-usuario');
   }
 
   atualizar(el) {
@@ -95,14 +100,38 @@ export class ListaUsuarioPage  {
   }
 
 
-  async apresentarPopover(event : any){
+  async apresentarPopover(event: any) {
     const popover = await this.popoverCtrl.create({
       component: SubMenuComponent,
       event: event,
-     
     });
 
     return await popover.present();
+  }
+
+  async abrirAlert() {
+    let alert = await this.alertCtrl.create({
+      header: 'Deseja excluir este perfil?',
+      message: 'Ao excluir este perfil, todos os dados serão deletados e não poderão ser recuperados novamente. Você tem certeza disso?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler : () => {
+            this.alertCtrl.dismiss();
+          }
+        },
+        {
+          text: 'Sim',
+          handler : () => {
+            let listaParaExcluir = this.listaAtualizada();
+
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
 

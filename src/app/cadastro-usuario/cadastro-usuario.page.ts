@@ -96,8 +96,7 @@ export class CadastroUsuarioPage implements OnInit {
     this.listaPessoas = lista ? JSON.parse(lista) : [];
   }
 
-  ionViewDidEnter(){
-    
+  ionViewDidEnter() {
     let usuario = this.usuarioService.getDestn();
     this.pessoas = new UsuarioModel(usuario);
 
@@ -110,20 +109,18 @@ export class CadastroUsuarioPage implements OnInit {
   salvar() {
 
     const index = this.listaPessoas.findIndex(x => x.id === this.pessoas.id);
-    
+
     if(index == -1 && this.pessoas.id ==undefined){
 
       this.pessoas.id = this.listaPessoas.length + 1;
       this.listaPessoas.push(this.pessoas);
       localStorage.setItem('listaAtualizada', JSON.stringify(this.listaPessoas));
       this.pessoas = new UsuarioModel();
-    
     } else {
       this.listaPessoas[index] = this.pessoas;
       localStorage.setItem('listaAtualizada', JSON.stringify(this.listaPessoas));
       this.pessoas = new UsuarioModel();
     }
-    
   }
 
 

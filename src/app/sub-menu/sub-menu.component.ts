@@ -1,7 +1,9 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UsuarioModel } from 'src/shared/models/usuario.model';
 import { UsuarioService } from '../services/usuario';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-sub-menu',
@@ -16,7 +18,8 @@ export class SubMenuComponent implements OnInit {
   eventoAlert: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private usuarioService: UsuarioService,
-    private alertCtrl : AlertController) { 
+    private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController) {
     this.inicializarLista();
   }
 
@@ -27,17 +30,15 @@ export class SubMenuComponent implements OnInit {
     this.listaPessoas = lista ? JSON.parse(lista) : [];
   }
 
-  ionViewDidEnter(){
-    
+  ionViewDidEnter() {
     let usuario = this.usuarioService.getDestn();
     this.pessoas = new UsuarioModel(usuario);
-    usuario = this.usuarioService.setDestn(null);
-    
+    //usuario = this.usuarioService.setDestn(null);
   }
 
-  async abrirAlert(){
-    console.log('teste');
-    this.eventoAlert.emit(true);
+  async abrirAlert() {
+
+    this.popoverCtrl.dismiss();
     let alert = await this.alertCtrl.create({
       header: 'Deseja excluir este perfil?',
       message: 'Ao excluir este perfil, todos os dados serão deletados e não poderão ser recuperados novamente. Você tem certeza disso?',
@@ -45,18 +46,35 @@ export class SubMenuComponent implements OnInit {
         {
           text: 'Não',
           role: 'cancel',
-          handler : ()=>{
+          handler : () => {
             this.alertCtrl.dismiss();
           }
         },
         {
-          text:'Sim',
-          handler : ()=>{
-
+          text: 'Sim',
+          handler : () => {
+            this.removerPorId(this.listaPessoas, this.pessoas.id);
+            localStorage.setItem('listaAtualizada', JSON.stringify(this.listaPessoas));
+            this.usuarioService.setDestn(null);
           }
         }
       ]
     });
+
+    alert.present();
   }
+
+  removerPorId( array, id) {
+
+    let result = array.filter((el) => {
+      return el.id == id;
+    });
+
+    for(let elemento of result) {
+      let index = array.indexOf(elemento);
+      array.splice(index, 1);
+    }
+  }
+
 
 }
