@@ -4,3 +4,7 @@
     <ion-label>Excluir</ion-label>
   </ion-item>
 </ion-list>
+<div *ngIf="mostrar == true">
+  <app-lista-usuario [listaAualizada]="atualizar"></app-lista-usuario>
+</div>
+

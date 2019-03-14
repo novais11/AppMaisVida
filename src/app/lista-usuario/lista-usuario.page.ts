@@ -30,49 +30,33 @@ export class ListaUsuarioPage  {
               public usuarioService: UsuarioService,
               private popoverCtrl: PopoverController,
               private  alertCtrl: AlertController) {
-    this.pessoas = [
-      // tslint:disable-next-line:max-line-length
-      {id: 1, nome: 'Pedro', email: 'pedro@gamil.com', nacionalidade: 'Brasileiro',
-       estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-        fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria' },
-
-      {id: 2, nome: 'Paula', email: 'paula@gamil.com', nacionalidade: 'Argentino',
-      estado: 'Distrito Federal', escolaridade: 'Ensino Médio Completo', sConjugal: 'Solteiro',
-       fEscola: 'não', nomeMae: 'Maria José', nomePai: 'José Maria' },
-
-      {id: 3, nome: 'Ana', email: 'anapaula@gamil.com', nacionalidade: 'Uruguaio',
-      estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria'},
-
-      {id: 4, nome: 'Rogério', email: 'rogerio@gamil.com', nacionalidade: 'Paraguaio',
-      estado: 'Distrito Federal', escolaridade: 'Superior Completo', sConjugal: 'Casado',
-       fEscola: 'sim', nomeMae: 'Maria José', nomePai: 'José Maria'},
-    ];
-
-    localStorage.setItem('listaAtualizada', JSON.stringify(this.pessoas));
+    
+    
+    
   }
 
   converterData() {
     this.dataHoje = this.now.getDay() + 1 +"/" + this.now.getMonth() +"/"+ this.now.getFullYear();
   }
+ 
 
   ngOnChanges(simpleChanges: SimpleChanges): void {
-    if(simpleChanges.listaAualizada && simpleChanges.listaAualizada.currentValue){
-      this.listaAtualizada();
-    }
+    debugger;
+        this.listaAtualizada();          
   }
 
   ionViewDidEnter() {
     this.listaAtualizada();
   }
 
-  ionViewWillEnter() {
-    this.listaAtualizada();
-  }
+  
 
   listaAtualizada() {
+
     const lista = localStorage.getItem('listaAtualizada');
-    if ( lista != null) {
+    if ( lista != null && this.listaAualizada == false) {
+      this.pessoasFiltradas = lista ? JSON.parse(lista) : [];
+    } else if(lista != null && this.listaAualizada == true){
       this.pessoasFiltradas = lista ? JSON.parse(lista) : [];
     } else{
       this.pessoasFiltradas = this.pessoas.sort((a, b) => {

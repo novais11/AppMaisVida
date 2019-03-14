@@ -14,6 +14,7 @@ export class SubMenuComponent implements OnInit {
   listaPessoas: Array<any> = [];
   pessoas: UsuarioModel = new UsuarioModel();
   atualizar =  false;
+  mostrar = false;
 
   @Output()
   eventoAlert: EventEmitter<any> = new EventEmitter<any>();
@@ -56,6 +57,8 @@ export class SubMenuComponent implements OnInit {
             this.removerPorId(this.listaPessoas, this.pessoas.id);
             localStorage.setItem('listaAtualizada', JSON.stringify(this.listaPessoas));
             this.usuarioService.setDestn(null);
+            this.atualizar = true;
+            this.eventoAlert.emit(this.atualizar);
           }
         }
       ]
