@@ -33,7 +33,6 @@ export class SubMenuComponent implements OnInit {
   ionViewDidEnter() {
     let usuario = this.usuarioService.getDestn();
     this.pessoas = new UsuarioModel(usuario);
-    //usuario = this.usuarioService.setDestn(null);
   }
 
   async abrirAlert() {
